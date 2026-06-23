@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "Memoirs"
+version = "1.0.0"
+id = "artifacts/memoirs"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 22051
+
+[services.development]
+run = "pnpm --filter @workspace/memoirs run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/memoirs", "run", "build" ]
+publicDir = "artifacts/memoirs/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "22051"
+BASE_PATH = "/"
