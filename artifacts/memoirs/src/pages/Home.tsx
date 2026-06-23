@@ -3,6 +3,66 @@ import { format } from "date-fns";
 import { useGetMemoirStats, useGetFeaturedMemoirs, useGetRecentMemoirs } from "@workspace/api-client-react";
 import { Skeleton } from "@/components/ui/skeleton";
 
+const PLATFORMS = [
+  {
+    name: "YouTube",
+    description: "Watch full episodes",
+    href: "https://youtube.com/@memoirsinitiative",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
+        <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+      </svg>
+    ),
+  },
+  {
+    name: "Spotify",
+    description: "Listen on the go",
+    href: "https://spotify.com/show/memoirs",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
+        <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/>
+      </svg>
+    ),
+  },
+  {
+    name: "Apple Podcasts",
+    description: "Subscribe & listen",
+    href: "https://podcasts.apple.com/podcast/memoirs",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
+        <path d="M12.003 0C5.374 0 0 5.374 0 12.003c0 6.628 5.374 12.002 12.003 12.002 6.628 0 12.002-5.374 12.002-12.002C24.005 5.374 18.631 0 12.003 0zm0 4.37a7.633 7.633 0 0 1 7.633 7.633c0 4.215-3.418 7.633-7.633 7.633A7.633 7.633 0 0 1 4.37 12.003 7.633 7.633 0 0 1 12.003 4.37zm0 1.527a6.106 6.106 0 0 0-6.106 6.106 6.106 6.106 0 0 0 6.106 6.106 6.106 6.106 0 0 0 6.106-6.106 6.106 6.106 0 0 0-6.106-6.106zm0 2.29c.422 0 .764.342.764.764v4.585c0 .422-.342.764-.764.764a.764.764 0 0 1-.764-.764V8.951c0-.422.342-.764.764-.764zm0 6.87a.955.955 0 0 1 .955.955.955.955 0 0 1-.955.955.955.955 0 0 1-.955-.955.955.955 0 0 1 .955-.955z"/>
+      </svg>
+    ),
+  },
+];
+
+const PHASES = [
+  {
+    number: "01",
+    label: "Development",
+    period: "Month 1",
+    description: "Finalising branding, visual identity, and theme. Securing the first 6 guests — a mix of elders and public figures. Building the production team and studio setup.",
+  },
+  {
+    number: "02",
+    label: "Production",
+    period: "Months 2–3",
+    description: "Filming and editing the first 6–10 episodes. Creating promotional assets, thumbnails, and teaser reels. Developing the episode format and storytelling arc.",
+  },
+  {
+    number: "03",
+    label: "Launch",
+    period: "Month 4",
+    description: "Dropping the first 3 episodes simultaneously. Weekly releases on YouTube, Spotify, and Apple Podcasts. Email newsletter campaign and strategic guest network rollout.",
+  },
+  {
+    number: "04",
+    label: "Growth",
+    period: "Months 5–9",
+    description: "Partnering with NGOs, embassies, and cultural ministries. Beginning the Memoirs documentary series. Hosting Memoirs Live — a public recorded storytelling event.",
+  },
+];
+
 export default function Home() {
   const { data: stats, isLoading: statsLoading } = useGetMemoirStats();
   const { data: featuredMemoirs, isLoading: featuredLoading } = useGetFeaturedMemoirs();
@@ -11,28 +71,47 @@ export default function Home() {
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
-      <section className="relative overflow-hidden py-24 md:py-32 lg:py-40 bg-foreground text-background">
+      <section className="relative overflow-hidden py-24 md:py-32 lg:py-44 bg-foreground text-background">
         <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-3xl">
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-serif font-medium leading-tight tracking-tight mb-8">
-              A sacred archive<br />of human lives.
+          <div className="max-w-4xl">
+            <span className="inline-block mb-8 px-3 py-1 border border-background/20 text-background/60 text-xs font-medium uppercase tracking-widest rounded-sm">
+              Video Podcast Series
+            </span>
+            <h1 className="text-5xl md:text-6xl lg:text-8xl font-serif font-medium leading-tight tracking-tight mb-8">
+              Stories that deserve<br />to outlive their tellers.
             </h1>
-            <p className="text-xl md:text-2xl text-background/80 mb-12 max-w-2xl leading-relaxed font-serif">
-              We preserve the stories of those who lived deeply, so future generations may find wisdom in their words.
+            <p className="text-xl md:text-2xl text-background/70 mb-12 max-w-2xl leading-relaxed font-serif">
+              Memoirs is a high-quality video storytelling series preserving the untold lives, wisdom, and lived experiences of elders and public figures — for posterity, inspiration, and learning.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col sm:flex-row gap-4 mb-16">
+              <a
+                href="https://youtube.com/@memoirsinitiative"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex h-12 items-center justify-center gap-2 rounded-sm bg-primary px-8 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+              >
+                <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                Watch on YouTube
+              </a>
               <Link
                 href="/stories"
-                className="inline-flex h-12 items-center justify-center rounded-sm bg-primary px-8 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
+                className="inline-flex h-12 items-center justify-center rounded-sm border border-background/20 bg-transparent px-8 text-sm font-medium text-background transition-colors hover:bg-background/10"
               >
-                Read Stories
+                Read the Archive
               </Link>
-              <Link
-                href="/contribute"
-                className="inline-flex h-12 items-center justify-center rounded-sm border border-background/20 bg-transparent px-8 text-sm font-medium text-background transition-colors hover:bg-background/10 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
-              >
-                Share a Memory
-              </Link>
+            </div>
+
+            {/* Platform Links */}
+            <div className="flex flex-wrap items-center gap-6">
+              <span className="text-xs font-medium uppercase tracking-widest text-background/40">Also available on</span>
+              <a href="https://spotify.com/show/memoirs" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-background/50 hover:text-background/90 transition-colors text-sm">
+                <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+                Spotify
+              </a>
+              <a href="https://podcasts.apple.com/podcast/memoirs" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-background/50 hover:text-background/90 transition-colors text-sm">
+                <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4"><path d="M12.003 0C5.374 0 0 5.374 0 12.003c0 6.628 5.374 12.002 12.003 12.002 6.628 0 12.002-5.374 12.002-12.002C24.005 5.374 18.631 0 12.003 0zm0 4.37a7.633 7.633 0 0 1 7.633 7.633c0 4.215-3.418 7.633-7.633 7.633A7.633 7.633 0 0 1 4.37 12.003 7.633 7.633 0 0 1 12.003 4.37zm0 1.527a6.106 6.106 0 0 0-6.106 6.106 6.106 6.106 0 0 0 6.106 6.106 6.106 6.106 0 0 0 6.106-6.106 6.106 6.106 0 0 0-6.106-6.106zm0 2.29c.422 0 .764.342.764.764v4.585c0 .422-.342.764-.764.764a.764.764 0 0 1-.764-.764V8.951c0-.422.342-.764.764-.764zm0 6.87a.955.955 0 0 1 .955.955.955.955 0 0 1-.955.955.955.955 0 0 1-.955-.955.955.955 0 0 1 .955-.955z"/></svg>
+                Apple Podcasts
+              </a>
             </div>
           </div>
         </div>
@@ -44,36 +123,78 @@ export default function Home() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             <div className="flex flex-col gap-2">
               <span className="text-4xl md:text-5xl font-serif text-primary">
-                {statsLoading ? <Skeleton className="h-12 w-24" /> : stats?.totalMemoirs || 0}
+                {statsLoading ? <Skeleton className="h-12 w-20" /> : stats?.totalMemoirs || 0}
               </span>
-              <span className="text-sm font-medium uppercase tracking-widest text-muted-foreground">Stories Preserved</span>
+              <span className="text-sm font-medium uppercase tracking-widest text-muted-foreground">Stories Archived</span>
             </div>
             <div className="flex flex-col gap-2">
               <span className="text-4xl md:text-5xl font-serif text-primary">
-                {statsLoading ? <Skeleton className="h-12 w-24" /> : stats?.totalContributors || 0}
+                {statsLoading ? <Skeleton className="h-12 w-20" /> : stats?.totalContributors || 0}
               </span>
               <span className="text-sm font-medium uppercase tracking-widest text-muted-foreground">Contributors</span>
             </div>
             <div className="flex flex-col gap-2">
               <span className="text-4xl md:text-5xl font-serif text-primary">
-                {statsLoading ? <Skeleton className="h-12 w-24" /> : stats?.totalCategories || 0}
+                {statsLoading ? <Skeleton className="h-12 w-20" /> : stats?.totalCategories || 0}
               </span>
               <span className="text-sm font-medium uppercase tracking-widest text-muted-foreground">Collections</span>
+            </div>
+            <div className="flex flex-col gap-2">
+              <span className="text-4xl md:text-5xl font-serif text-primary">3</span>
+              <span className="text-sm font-medium uppercase tracking-widest text-muted-foreground">Platforms</span>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Featured Memoirs */}
+      {/* Watch & Listen Section */}
       <section className="py-24 bg-card">
+        <div className="container mx-auto px-4">
+          <div className="mb-16">
+            <h2 className="text-3xl md:text-4xl font-serif mb-4">Watch &amp; Listen</h2>
+            <p className="text-muted-foreground max-w-2xl">
+              Memoirs airs as a full video series on YouTube and as a podcast on all major audio platforms. Every episode is a complete portrait of a life fully lived.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {PLATFORMS.map((platform) => (
+              <a
+                key={platform.name}
+                href={platform.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex flex-col gap-6 p-8 border border-border rounded-sm bg-background hover:border-primary/40 hover:shadow-md transition-all duration-300"
+              >
+                <div className="w-12 h-12 rounded-sm bg-primary/10 text-primary flex items-center justify-center group-hover:bg-primary group-hover:text-primary-foreground transition-colors duration-300">
+                  {platform.icon}
+                </div>
+                <div>
+                  <h3 className="font-serif text-xl mb-1 group-hover:text-primary transition-colors">{platform.name}</h3>
+                  <p className="text-sm text-muted-foreground">{platform.description}</p>
+                </div>
+                <span className="text-xs font-medium uppercase tracking-widest text-primary flex items-center gap-2 mt-auto">
+                  Open
+                  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-3 h-3 transition-transform group-hover:translate-x-1"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+                </span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Lives */}
+      <section className="py-24">
         <div className="container mx-auto px-4">
           <div className="flex items-end justify-between mb-16">
             <div>
               <h2 className="text-3xl md:text-4xl font-serif mb-4">Featured Lives</h2>
-              <p className="text-muted-foreground max-w-2xl">Stories of profound impact, curated from our archive.</p>
+              <p className="text-muted-foreground max-w-2xl">Stories of profound impact — curated from the archive.</p>
             </div>
+            <Link href="/stories" className="hidden md:inline-flex text-sm font-medium text-primary hover:underline underline-offset-4">
+              Full archive
+            </Link>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {featuredLoading ? (
               Array.from({ length: 3 }).map((_, i) => (
@@ -83,13 +204,15 @@ export default function Home() {
                   <Skeleton className="h-4 w-full" />
                 </div>
               ))
+            ) : featuredMemoirs?.length === 0 ? (
+              <p className="text-muted-foreground col-span-3 text-center py-12">No featured stories yet.</p>
             ) : featuredMemoirs?.map(memoir => (
               <Link key={memoir.id} href={`/stories/${memoir.id}`} className="group flex flex-col gap-6">
                 <div className="relative aspect-[4/5] overflow-hidden bg-muted rounded-sm">
                   {memoir.imageUrl ? (
-                    <img 
-                      src={memoir.imageUrl} 
-                      alt={memoir.subjectName} 
+                    <img
+                      src={memoir.imageUrl}
+                      alt={memoir.subjectName}
                       className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-105"
                     />
                   ) : (
@@ -128,11 +251,42 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Journey / Phases Section */}
+      <section className="py-24 bg-foreground text-background">
+        <div className="container mx-auto px-4">
+          <div className="mb-16 max-w-2xl">
+            <h2 className="text-3xl md:text-4xl font-serif mb-4">The Memoirs Journey</h2>
+            <p className="text-background/60 leading-relaxed">
+              We are building this one phase at a time — from the first recorded episode to a full documentary series aired on global streaming platforms.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-0 border border-background/10 rounded-sm overflow-hidden">
+            {PHASES.map((phase, idx) => (
+              <div
+                key={phase.number}
+                className="p-8 border-r border-b border-background/10 last:border-r-0 flex flex-col gap-6"
+              >
+                <div className="flex items-center justify-between">
+                  <span className="text-4xl font-serif text-background/20">{phase.number}</span>
+                  <span className="text-xs font-medium uppercase tracking-widest text-primary/80 border border-primary/30 px-2 py-1 rounded-sm">
+                    {phase.period}
+                  </span>
+                </div>
+                <div>
+                  <h3 className="font-serif text-xl text-background mb-3">{phase.label}</h3>
+                  <p className="text-sm text-background/50 leading-relaxed">{phase.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Recent Additions */}
       <section className="py-24">
         <div className="container mx-auto px-4 max-w-4xl">
           <h2 className="text-3xl md:text-4xl font-serif mb-16 text-center">Recently Added</h2>
-          
+
           <div className="flex flex-col gap-12">
             {recentLoading ? (
               Array.from({ length: 4 }).map((_, i) => (
@@ -149,10 +303,10 @@ export default function Home() {
               <Link key={memoir.id} href={`/stories/${memoir.id}`} className="group flex flex-col sm:flex-row gap-8 items-start border-b border-border pb-12 last:border-0 hover:bg-muted/30 p-4 -mx-4 rounded-sm transition-colors">
                 <div className="w-full sm:w-32 aspect-[3/4] shrink-0 bg-muted overflow-hidden rounded-sm">
                   {memoir.imageUrl && (
-                    <img 
-                      src={memoir.imageUrl} 
-                      alt={memoir.subjectName} 
-                      className="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-500" 
+                    <img
+                      src={memoir.imageUrl}
+                      alt={memoir.subjectName}
+                      className="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-500"
                     />
                   )}
                 </div>
@@ -179,15 +333,31 @@ export default function Home() {
               </Link>
             ))}
           </div>
-          
+
           <div className="mt-16 text-center">
             <Link
               href="/stories"
-              className="inline-flex h-12 items-center justify-center rounded-sm border border-input bg-background px-8 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
+              className="inline-flex h-12 items-center justify-center rounded-sm border border-input bg-background px-8 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground"
             >
-              View All Archive
+              View Full Archive
             </Link>
           </div>
+        </div>
+      </section>
+
+      {/* CTA Banner */}
+      <section className="py-24 bg-primary/5 border-y border-border">
+        <div className="container mx-auto px-4 text-center max-w-2xl">
+          <h2 className="text-3xl md:text-4xl font-serif mb-6">Know a story that deserves to be told?</h2>
+          <p className="text-muted-foreground mb-10 leading-relaxed text-lg">
+            Whether it is a grandparent's journey, a community leader's legacy, or a life quietly well-lived — we want to hear it. Nominate a subject or contribute a written account to the archive.
+          </p>
+          <Link
+            href="/contribute"
+            className="inline-flex h-12 items-center justify-center rounded-sm bg-primary px-10 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+          >
+            Share a Story
+          </Link>
         </div>
       </section>
     </div>
