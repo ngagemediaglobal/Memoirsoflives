@@ -36,32 +36,6 @@ const PLATFORMS = [
   },
 ];
 
-const PHASES = [
-  {
-    number: "01",
-    label: "Development",
-    period: "Month 1",
-    description: "Finalising branding, visual identity, and theme. Securing the first 6 guests — a mix of elders and public figures. Building the production team and studio setup.",
-  },
-  {
-    number: "02",
-    label: "Production",
-    period: "Months 2–3",
-    description: "Filming and editing the first 6–10 episodes. Creating promotional assets, thumbnails, and teaser reels. Developing the episode format and storytelling arc.",
-  },
-  {
-    number: "03",
-    label: "Launch",
-    period: "Month 4",
-    description: "Dropping the first 3 episodes simultaneously. Weekly releases on YouTube, Spotify, and Apple Podcasts. Email newsletter campaign and strategic guest network rollout.",
-  },
-  {
-    number: "04",
-    label: "Growth",
-    period: "Months 5–9",
-    description: "Partnering with NGOs, embassies, and cultural ministries. Beginning the Memoirs documentary series. Hosting Memoirs Live — a public recorded storytelling event.",
-  },
-];
 
 export default function Home() {
   const { data: stats, isLoading: statsLoading } = useGetMemoirStats();
@@ -246,37 +220,6 @@ export default function Home() {
                   </p>
                 </div>
               </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Journey / Phases Section */}
-      <section className="py-24 bg-foreground text-background">
-        <div className="container mx-auto px-4">
-          <div className="mb-16 max-w-2xl">
-            <h2 className="text-3xl md:text-4xl font-serif mb-4">The Memoirs Journey</h2>
-            <p className="text-background/60 leading-relaxed">
-              We are building this one phase at a time — from the first recorded episode to a full documentary series aired on global streaming platforms.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-0 border border-background/10 rounded-sm overflow-hidden">
-            {PHASES.map((phase, idx) => (
-              <div
-                key={phase.number}
-                className="p-8 border-r border-b border-background/10 last:border-r-0 flex flex-col gap-6"
-              >
-                <div className="flex items-center justify-between">
-                  <span className="text-4xl font-serif text-background/20">{phase.number}</span>
-                  <span className="text-xs font-medium uppercase tracking-widest text-primary/80 border border-primary/30 px-2 py-1 rounded-sm">
-                    {phase.period}
-                  </span>
-                </div>
-                <div>
-                  <h3 className="font-serif text-xl text-background mb-3">{phase.label}</h3>
-                  <p className="text-sm text-background/50 leading-relaxed">{phase.description}</p>
-                </div>
-              </div>
             ))}
           </div>
         </div>
