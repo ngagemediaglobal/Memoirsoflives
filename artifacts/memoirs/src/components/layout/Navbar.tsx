@@ -19,6 +19,7 @@ export function Navbar() {
   const links = [
     { href: "/stories", label: "Archive" },
     { href: "/about", label: "About" },
+    { href: "/request", label: "Request a Memoir" },
   ];
 
   return (
@@ -55,10 +56,10 @@ export function Navbar() {
           </a>
           <div className="h-4 w-px bg-border mx-2" />
           <Link
-            href="/contribute"
+            href="/request"
             className="text-sm font-medium px-4 py-2 bg-primary text-primary-foreground rounded hover:bg-primary/90 transition-colors"
           >
-            Share a Story
+            Request a Memoir
           </Link>
         </nav>
 
@@ -108,10 +109,10 @@ export function Navbar() {
           </a>
           <div className="pt-3 mt-2 border-t border-border">
             <Link
-              href="/contribute"
+              href="/request"
               className="flex items-center justify-center h-12 w-full bg-primary text-primary-foreground rounded text-sm font-medium hover:bg-primary/90 transition-colors"
             >
-              Share a Story
+              Request a Memoir
             </Link>
           </div>
         </nav>

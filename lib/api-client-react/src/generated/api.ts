@@ -28,6 +28,8 @@ import type {
   ListMemoirsParams,
   Memoir,
   MemoirInput,
+  MemoirRequestInput,
+  MemoirRequestResponse,
   MemoirStats,
   MemoirUpdate,
   NewsletterSubscribeInput,
@@ -952,6 +954,77 @@ export function useGetContributor<TData = Awaited<ReturnType<typeof getContribut
 
 
 
+
+export const getCreateMemoirRequestUrl = () => {
+
+
+
+
+  return `/api/memoir-requests`
+}
+
+/**
+ * @summary Submit a Memoir service request
+ */
+export const createMemoirRequest = async (memoirRequestInput: MemoirRequestInput, options?: RequestInit): Promise<MemoirRequestResponse> => {
+
+  return customFetch<MemoirRequestResponse>(getCreateMemoirRequestUrl(),
+  {
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(
+      memoirRequestInput,)
+  }
+);}
+
+
+
+
+export const getCreateMemoirRequestMutationOptions = <TError = ErrorType<void>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createMemoirRequest>>, TError,{data: BodyType<MemoirRequestInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof createMemoirRequest>>, TError,{data: BodyType<MemoirRequestInput>}, TContext> => {
+
+const mutationKey = ['createMemoirRequest'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof createMemoirRequest>>, {data: BodyType<MemoirRequestInput>}> = (props) => {
+          const {data} = props ?? {};
+
+          return  createMemoirRequest(data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type CreateMemoirRequestMutationResult = NonNullable<Awaited<ReturnType<typeof createMemoirRequest>>>
+    export type CreateMemoirRequestMutationBody = BodyType<MemoirRequestInput>
+    export type CreateMemoirRequestMutationError = ErrorType<void>
+
+    /**
+ * @summary Submit a Memoir service request
+ */
+export const useCreateMemoirRequest = <TError = ErrorType<void>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createMemoirRequest>>, TError,{data: BodyType<MemoirRequestInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof createMemoirRequest>>,
+        TError,
+        {data: BodyType<MemoirRequestInput>},
+        TContext
+      > => {
+      return useMutation(getCreateMemoirRequestMutationOptions(options));
+    }
 
 export const getSubscribeNewsletterUrl = () => {
 

@@ -242,6 +242,29 @@ export const GetContributorResponse = zod.object({
 
 
 /**
+ * @summary Submit a Memoir service request
+ */
+
+
+
+
+
+
+
+export const CreateMemoirRequestBody = zod.object({
+  "subjectName": zod.string().min(1),
+  "subjectAge": zod.number().nullish(),
+  "milestone": zod.string().nullish(),
+  "relationship": zod.string().min(1),
+  "storyNotes": zod.string().min(1),
+  "package": zod.enum(['essential', 'standard', 'premium']),
+  "requesterName": zod.string().min(1),
+  "requesterEmail": zod.string().min(1),
+  "requesterPhone": zod.string().nullish()
+})
+
+
+/**
  * @summary Subscribe to the newsletter
  */
 

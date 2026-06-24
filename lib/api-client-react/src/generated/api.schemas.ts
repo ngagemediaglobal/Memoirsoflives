@@ -114,6 +114,40 @@ export interface CategoryInput {
   description?: string | null;
 }
 
+export type MemoirRequestInputPackage = typeof MemoirRequestInputPackage[keyof typeof MemoirRequestInputPackage];
+
+
+export const MemoirRequestInputPackage = {
+  essential: 'essential',
+  standard: 'standard',
+  premium: 'premium',
+} as const;
+
+export interface MemoirRequestInput {
+  /** @minLength 1 */
+  subjectName: string;
+  /** @nullable */
+  subjectAge?: number | null;
+  /** @nullable */
+  milestone?: string | null;
+  /** @minLength 1 */
+  relationship: string;
+  /** @minLength 1 */
+  storyNotes: string;
+  package: MemoirRequestInputPackage;
+  /** @minLength 1 */
+  requesterName: string;
+  /** @minLength 1 */
+  requesterEmail: string;
+  /** @nullable */
+  requesterPhone?: string | null;
+}
+
+export interface MemoirRequestResponse {
+  id: number;
+  message: string;
+}
+
 export interface NewsletterSubscribeInput {
   /** @minLength 1 */
   email: string;
