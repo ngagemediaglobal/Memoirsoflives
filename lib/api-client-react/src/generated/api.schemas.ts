@@ -114,6 +114,17 @@ export interface CategoryInput {
   description?: string | null;
 }
 
+export interface NewsletterSubscribeInput {
+  /** @minLength 1 */
+  email: string;
+  /** @nullable */
+  name?: string | null;
+}
+
+export interface NewsletterSubscribeResponse {
+  message: string;
+}
+
 export type ListMemoirsParams = {
 category?: string;
 featured?: boolean;

@@ -16,3 +16,5 @@ export * from './memoir';
 export * from './memoirInput';
 export * from './memoirStats';
 export * from './memoirUpdate';
+export * from './newsletterSubscribeInput';
+export * from './newsletterSubscribeResponse';

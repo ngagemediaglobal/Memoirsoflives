@@ -242,6 +242,22 @@ export const GetContributorResponse = zod.object({
 
 
 /**
+ * @summary Subscribe to the newsletter
+ */
+
+
+
+export const SubscribeNewsletterBody = zod.object({
+  "email": zod.string().min(1),
+  "name": zod.string().nullish()
+})
+
+export const SubscribeNewsletterResponse = zod.object({
+  "message": zod.string()
+})
+
+
+/**
  * @summary List all categories
  */
 export const ListCategoriesResponseItem = zod.object({

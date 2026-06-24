@@ -15,6 +15,8 @@ tags:
     description: Story contributors/subjects
   - name: categories
     description: Story categories
+  - name: newsletter
+    description: Newsletter subscriptions
 paths:
   /healthz:
     get:
@@ -231,6 +233,33 @@ paths:
         "404":
           description: Not found
 
+  /newsletter/subscribe:
+    post:
+      operationId: subscribeNewsletter
+      tags: [newsletter]
+      summary: Subscribe to the newsletter
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NewsletterSubscribeInput"
+      responses:
+        "200":
+          description: Already subscribed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NewsletterSubscribeResponse"
+        "201":
+          description: Subscribed successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NewsletterSubscribeResponse"
+        "400":
+          description: Invalid input
+
   /categories:
     get:
       operationId: listCategories
@@ -432,3 +461,20 @@ components:
           minLength: 1
         description:
           type: ["string", "null"]
+
+    NewsletterSubscribeInput:
+      type: object
+      required: [email]
+      properties:
+        email:
+          type: string
+          minLength: 1
+        name:
+          type: ["string", "null"]
+
+    NewsletterSubscribeResponse:
+      type: object
+      required: [message]
+      properties:
+        message:
+          type: string

@@ -1,6 +1,7 @@
+import { useState } from "react";
 import { Link } from "wouter";
 import { format } from "date-fns";
-import { useGetMemoirStats, useGetFeaturedMemoirs, useGetRecentMemoirs } from "@workspace/api-client-react";
+import { useGetMemoirStats, useGetFeaturedMemoirs, useGetRecentMemoirs, useSubscribeNewsletter } from "@workspace/api-client-react";
 import { Skeleton } from "@/components/ui/skeleton";
 
 const PLATFORMS = [
@@ -36,6 +37,89 @@ const PLATFORMS = [
   },
 ];
 
+
+function NewsletterSection() {
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [submitted, setSubmitted] = useState(false);
+  const [message, setMessage] = useState("");
+
+  const { mutate, isPending } = useSubscribeNewsletter({
+    mutation: {
+      onSuccess: (data) => {
+        setMessage(data.message);
+        setSubmitted(true);
+      },
+      onError: () => {
+        setMessage("Something went wrong. Please try again.");
+      },
+    },
+  });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email.trim()) return;
+    mutate({ data: { email: email.trim(), name: name.trim() || null } });
+  };
+
+  return (
+    <section className="py-24 bg-foreground text-background">
+      <div className="container mx-auto px-4 max-w-2xl text-center">
+        <span className="inline-block mb-6 px-3 py-1 border border-background/20 text-background/50 text-xs font-medium uppercase tracking-widest rounded-sm">
+          Stay Connected
+        </span>
+        <h2 className="text-3xl md:text-4xl font-serif mb-4">
+          Stories delivered to your inbox.
+        </h2>
+        <p className="text-background/60 leading-relaxed mb-10 max-w-lg mx-auto">
+          Subscribe for new story excerpts, episode alerts, and updates from the Memoirs archive — never more than once a week.
+        </p>
+
+        {submitted ? (
+          <div className="flex flex-col items-center gap-4">
+            <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-6 h-6 text-primary">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <p className="text-lg font-serif text-background/90">{message}</p>
+          </div>
+        ) : (
+          <form onSubmit={handleSubmit} className="flex flex-col gap-3 max-w-md mx-auto">
+            <input
+              type="text"
+              placeholder="Your name (optional)"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="h-12 w-full rounded-sm bg-background/10 border border-background/20 px-4 text-sm text-background placeholder:text-background/40 focus:outline-none focus:ring-1 focus:ring-primary transition-colors"
+            />
+            <input
+              type="email"
+              required
+              placeholder="Your email address"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="h-12 w-full rounded-sm bg-background/10 border border-background/20 px-4 text-sm text-background placeholder:text-background/40 focus:outline-none focus:ring-1 focus:ring-primary transition-colors"
+            />
+            {message && (
+              <p className="text-sm text-destructive-foreground bg-destructive/20 px-3 py-2 rounded-sm text-left">{message}</p>
+            )}
+            <button
+              type="submit"
+              disabled={isPending}
+              className="h-12 rounded-sm bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+            >
+              {isPending ? "Subscribing…" : "Subscribe"}
+            </button>
+            <p className="text-xs text-background/30 mt-1">
+              No spam. Unsubscribe at any time.
+            </p>
+          </form>
+        )}
+      </div>
+    </section>
+  );
+}
 
 export default function Home() {
   const { data: stats, isLoading: statsLoading } = useGetMemoirStats();
@@ -287,6 +371,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <NewsletterSection />
 
       {/* CTA Banner */}
       <section className="py-24 bg-primary/5 border-y border-border">
