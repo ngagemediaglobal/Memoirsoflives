@@ -1,5 +1,6 @@
 import { Link, useLocation } from "wouter";
 import { cn } from "@/lib/utils";
+import logoFull from "@assets/Asset_1-1_1782271796331.png";
 
 export function Navbar() {
   const [location] = useLocation();
@@ -10,12 +11,14 @@ export function Navbar() {
   ];
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-md">
+    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/90 backdrop-blur-md">
       <div className="container mx-auto px-4 h-20 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-2">
-          <span className="font-serif text-2xl font-bold italic tracking-tighter text-primary">
-            Memoirs
-          </span>
+        <Link href="/" className="flex items-center">
+          <img
+            src={logoFull}
+            alt="Memoirs"
+            className="h-9 w-auto"
+          />
         </Link>
 
         <nav className="hidden md:flex items-center gap-8">
