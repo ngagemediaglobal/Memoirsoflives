@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "wouter";
 import { format } from "date-fns";
-import { useGetMemoirStats, useGetFeaturedMemoirs, useGetRecentMemoirs, useSubscribeNewsletter } from "@workspace/api-client-react";
+import { useGetMemoirStats, useGetFeaturedMemoirs, useGetRecentMemoirs, useSubscribeNewsletter, useListStoreProducts } from "@workspace/api-client-react";
 import { Skeleton } from "@/components/ui/skeleton";
 
 const PLATFORMS = [
@@ -125,6 +125,7 @@ export default function Home() {
   const { data: stats, isLoading: statsLoading } = useGetMemoirStats();
   const { data: featuredMemoirs, isLoading: featuredLoading } = useGetFeaturedMemoirs();
   const { data: recentMemoirs, isLoading: recentLoading } = useGetRecentMemoirs();
+  const { data: storeProducts, isLoading: storeLoading } = useListStoreProducts();
 
   return (
     <div className="flex flex-col">
@@ -373,6 +374,75 @@ export default function Home() {
               className="inline-flex h-12 items-center justify-center rounded-sm border border-input bg-background px-8 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground"
             >
               View Full Archive
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Legacy Store Preview */}
+      <section className="py-20 border-b border-border">
+        <div className="container mx-auto px-4 max-w-5xl">
+          <div className="flex items-end justify-between mb-10">
+            <div>
+              <span className="block text-xs font-medium uppercase tracking-widest text-muted-foreground mb-3">Legacy Store</span>
+              <h2 className="text-3xl md:text-4xl font-serif">Gifts that outlive the moment.</h2>
+              <p className="text-muted-foreground mt-3 max-w-lg leading-relaxed">
+                Thoughtfully designed items for preserving stories and honouring the people who shaped your life.
+              </p>
+            </div>
+            <Link
+              href="/store"
+              className="hidden sm:inline-flex items-center gap-2 text-sm font-medium text-primary hover:underline underline-offset-4 shrink-0 ml-8"
+            >
+              Shop all
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-3.5 h-3.5"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
+            </Link>
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {storeLoading
+              ? [...Array(4)].map((_, i) => (
+                  <div key={i} className="border border-border rounded animate-pulse">
+                    <div className="aspect-square bg-muted/50 rounded-t" />
+                    <div className="p-4 space-y-2">
+                      <div className="h-4 bg-muted/50 rounded w-3/4" />
+                      <div className="h-3 bg-muted/30 rounded w-full" />
+                    </div>
+                  </div>
+                ))
+              : storeProducts?.slice(0, 4).map((product) => (
+                  <Link
+                    key={product.id}
+                    href="/store"
+                    className="group flex flex-col border border-border rounded hover:border-primary/40 transition-all duration-200 bg-background"
+                  >
+                    <div className="aspect-square bg-muted/30 rounded-t flex items-center justify-center relative">
+                      {product.featured && (
+                        <span className="absolute top-2 left-2 text-xs font-medium bg-primary/15 text-primary px-2 py-0.5 rounded-sm">
+                          Popular
+                        </span>
+                      )}
+                      <span className="text-4xl">
+                        {{ journals: "📔", keepsakes: "🎁", gifts: "🃏", stationery: "✉️" }[product.category] ?? "📦"}
+                      </span>
+                    </div>
+                    <div className="p-4 flex flex-col flex-1">
+                      <h3 className="font-medium text-sm mb-1 group-hover:text-primary transition-colors">{product.name}</h3>
+                      <p className="text-xs text-muted-foreground leading-relaxed flex-1">{product.tagline}</p>
+                      <p className="text-sm font-semibold mt-3">
+                        {new Intl.NumberFormat("en-NG", { style: "currency", currency: "NGN", minimumFractionDigits: 0 }).format(product.priceKobo / 100)}
+                      </p>
+                    </div>
+                  </Link>
+                ))}
+          </div>
+
+          <div className="mt-8 text-center sm:hidden">
+            <Link
+              href="/store"
+              className="inline-flex h-11 items-center justify-center rounded-sm border border-input bg-background px-8 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground"
+            >
+              Shop all items
             </Link>
           </div>
         </div>
