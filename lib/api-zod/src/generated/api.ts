@@ -242,6 +242,64 @@ export const GetContributorResponse = zod.object({
 
 
 /**
+ * @summary List all store products
+ */
+export const ListStoreProductsResponseItem = zod.object({
+  "id": zod.number(),
+  "name": zod.string(),
+  "slug": zod.string(),
+  "tagline": zod.string(),
+  "description": zod.string(),
+  "priceKobo": zod.number(),
+  "category": zod.string(),
+  "inStock": zod.boolean(),
+  "featured": zod.boolean()
+})
+export const ListStoreProductsResponse = zod.array(ListStoreProductsResponseItem)
+
+
+/**
+ * @summary Get a product by slug
+ */
+export const GetStoreProductParams = zod.object({
+  "slug": zod.coerce.string()
+})
+
+export const GetStoreProductResponse = zod.object({
+  "id": zod.number(),
+  "name": zod.string(),
+  "slug": zod.string(),
+  "tagline": zod.string(),
+  "description": zod.string(),
+  "priceKobo": zod.number(),
+  "category": zod.string(),
+  "inStock": zod.boolean(),
+  "featured": zod.boolean()
+})
+
+
+/**
+ * @summary Place an order for a store product
+ */
+
+
+
+
+
+
+export const CreateStoreOrderBody = zod.object({
+  "productId": zod.number(),
+  "productName": zod.string(),
+  "quantity": zod.number().min(1),
+  "customerName": zod.string().min(1),
+  "customerEmail": zod.string().min(1),
+  "customerPhone": zod.string().nullish(),
+  "deliveryAddress": zod.string().min(1),
+  "notes": zod.string().nullish()
+})
+
+
+/**
  * @summary Submit a Memoir service request
  */
 

@@ -19,6 +19,8 @@ tags:
     description: Newsletter subscriptions
   - name: memoir-requests
     description: Memoir service requests
+  - name: store
+    description: Legacy gift store
 paths:
   /healthz:
     get:
@@ -234,6 +236,63 @@ paths:
                 $ref: "#/components/schemas/Contributor"
         "404":
           description: Not found
+
+  /store/products:
+    get:
+      operationId: listStoreProducts
+      tags: [store]
+      summary: List all store products
+      responses:
+        "200":
+          description: List of products
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/StoreProduct"
+
+  /store/products/{slug}:
+    get:
+      operationId: getStoreProduct
+      tags: [store]
+      summary: Get a product by slug
+      parameters:
+        - name: slug
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Product
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StoreProduct"
+        "404":
+          description: Not found
+
+  /store/orders:
+    post:
+      operationId: createStoreOrder
+      tags: [store]
+      summary: Place an order for a store product
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/StoreOrderInput"
+      responses:
+        "201":
+          description: Order placed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StoreOrderResponse"
+        "400":
+          description: Invalid input
 
   /memoir-requests:
     post:
@@ -484,6 +543,63 @@ components:
           minLength: 1
         description:
           type: ["string", "null"]
+
+    StoreProduct:
+      type: object
+      required: [id, name, slug, tagline, description, priceKobo, category, inStock, featured]
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        slug:
+          type: string
+        tagline:
+          type: string
+        description:
+          type: string
+        priceKobo:
+          type: integer
+        category:
+          type: string
+        inStock:
+          type: boolean
+        featured:
+          type: boolean
+
+    StoreOrderInput:
+      type: object
+      required: [productId, productName, quantity, customerName, customerEmail, deliveryAddress]
+      properties:
+        productId:
+          type: integer
+        productName:
+          type: string
+        quantity:
+          type: integer
+          minimum: 1
+        customerName:
+          type: string
+          minLength: 1
+        customerEmail:
+          type: string
+          minLength: 1
+        customerPhone:
+          type: ["string", "null"]
+        deliveryAddress:
+          type: string
+          minLength: 1
+        notes:
+          type: ["string", "null"]
+
+    StoreOrderResponse:
+      type: object
+      required: [id, message]
+      properties:
+        id:
+          type: integer
+        message:
+          type: string
 
     MemoirRequestInput:
       type: object

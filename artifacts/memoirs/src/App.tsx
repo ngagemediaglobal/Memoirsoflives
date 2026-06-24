@@ -9,6 +9,7 @@ import StoryDetail from "@/pages/StoryDetail";
 import Contribute from "@/pages/Contribute";
 import About from "@/pages/About";
 import RequestMemoir from "@/pages/RequestMemoir";
+import Store from "@/pages/Store";
 import NotFound from "@/pages/not-found";
 
 const queryClient = new QueryClient();
@@ -23,6 +24,7 @@ function Router() {
         <Route path="/contribute" component={Contribute} />
         <Route path="/about" component={About} />
         <Route path="/request" component={RequestMemoir} />
+        <Route path="/store" component={Store} />
         <Route component={NotFound} />
       </Switch>
     </Layout>

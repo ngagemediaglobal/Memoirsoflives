@@ -21,3 +21,6 @@ export * from './memoirStats';
 export * from './memoirUpdate';
 export * from './newsletterSubscribeInput';
 export * from './newsletterSubscribeResponse';
+export * from './storeOrderInput';
+export * from './storeOrderResponse';
+export * from './storeProduct';

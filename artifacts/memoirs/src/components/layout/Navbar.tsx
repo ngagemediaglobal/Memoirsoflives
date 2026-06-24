@@ -18,6 +18,7 @@ export function Navbar() {
 
   const links = [
     { href: "/stories", label: "Archive" },
+    { href: "/store", label: "Store" },
     { href: "/about", label: "About" },
     { href: "/request", label: "Request a Memoir" },
   ];

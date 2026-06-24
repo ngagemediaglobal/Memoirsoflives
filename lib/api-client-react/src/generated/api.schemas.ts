@@ -114,6 +114,40 @@ export interface CategoryInput {
   description?: string | null;
 }
 
+export interface StoreProduct {
+  id: number;
+  name: string;
+  slug: string;
+  tagline: string;
+  description: string;
+  priceKobo: number;
+  category: string;
+  inStock: boolean;
+  featured: boolean;
+}
+
+export interface StoreOrderInput {
+  productId: number;
+  productName: string;
+  /** @minimum 1 */
+  quantity: number;
+  /** @minLength 1 */
+  customerName: string;
+  /** @minLength 1 */
+  customerEmail: string;
+  /** @nullable */
+  customerPhone?: string | null;
+  /** @minLength 1 */
+  deliveryAddress: string;
+  /** @nullable */
+  notes?: string | null;
+}
+
+export interface StoreOrderResponse {
+  id: number;
+  message: string;
+}
+
 export type MemoirRequestInputPackage = typeof MemoirRequestInputPackage[keyof typeof MemoirRequestInputPackage];
 
 

@@ -5,6 +5,7 @@ import contributorsRouter from "./contributors";
 import categoriesRouter from "./categories";
 import newsletterRouter from "./newsletter";
 import memoirRequestsRouter from "./memoir-requests";
+import storeRouter from "./store";
 
 const router: IRouter = Router();
 
@@ -14,5 +15,6 @@ router.use(contributorsRouter);
 router.use(categoriesRouter);
 router.use(newsletterRouter);
 router.use(memoirRequestsRouter);
+router.use(storeRouter);
 
 export default router;
