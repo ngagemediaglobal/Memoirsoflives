@@ -49,13 +49,13 @@ export default function Home() {
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl">
             <span className="inline-block mb-8 px-3 py-1 border border-background/20 text-background/60 text-xs font-medium uppercase tracking-widest rounded-sm">
-              Video Podcast Series
+              Storytelling Platform
             </span>
             <h1 className="text-5xl md:text-6xl lg:text-8xl font-serif font-medium leading-tight tracking-tight mb-8">
               Stories that deserve<br />to outlive their tellers.
             </h1>
             <p className="text-xl md:text-2xl text-background/70 mb-12 max-w-2xl leading-relaxed font-serif">
-              Memoirs is a high-quality video storytelling series preserving the untold lives, wisdom, and lived experiences of elders and public figures — for posterity, inspiration, and learning.
+              Memoirs is a storytelling platform that documents the lives, experiences, and wisdom of remarkable people — public figures, community voices, and everyday individuals whose stories hold value for generations to come.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 mb-16">
               <a
@@ -127,7 +127,7 @@ export default function Home() {
           <div className="mb-16">
             <h2 className="text-3xl md:text-4xl font-serif mb-4">Watch &amp; Listen</h2>
             <p className="text-muted-foreground max-w-2xl">
-              Memoirs airs as a full video series on YouTube and as a podcast on all major audio platforms. Every episode is a complete portrait of a life fully lived.
+              Memoirs stories come to life across video, audio, and written formats — available on YouTube and all major podcast platforms so every story reaches the widest possible audience.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -293,7 +293,7 @@ export default function Home() {
         <div className="container mx-auto px-4 text-center max-w-2xl">
           <h2 className="text-3xl md:text-4xl font-serif mb-6">Know a story that deserves to be told?</h2>
           <p className="text-muted-foreground mb-10 leading-relaxed text-lg">
-            Whether it is a grandparent's journey, a community leader's legacy, or a life quietly well-lived — we want to hear it. Nominate a subject or contribute a written account to the archive.
+            Every life contains a universe of experience. Whether it belongs to a public figure, a community pillar, a family member, or a person whose name no one yet knows — if the story has value, it belongs here.
           </p>
           <Link
             href="/contribute"

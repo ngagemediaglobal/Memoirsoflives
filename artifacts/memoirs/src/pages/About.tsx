@@ -1,8 +1,8 @@
 import { Link } from "wouter";
 
 const OBJECTIVES = [
-  "Launch a compelling, high-quality video podcast series documenting rich life stories.",
-  "Build an engaged YouTube and social media audience around authentic storytelling.",
+  "Build a multi-format storytelling platform — video, audio, and written — that captures lives in full depth.",
+  "Grow an engaged audience across YouTube, social media, and podcast platforms around authentic human stories.",
   "Evolve into a documentary series on major streaming platforms.",
   "Host Memoirs Live — a recorded public storytelling event for community engagement.",
   "Monetise through content licensing, sponsorships, merchandise, and digital distribution.",
@@ -11,19 +11,19 @@ const OBJECTIVES = [
 const AUDIENCES = [
   {
     label: "Millennials & Gen Z",
-    description: "Young people hungry for meaning, history, and cultural depth beyond the scroll.",
+    description: "People hungry for meaning, cultural depth, and real stories that go beyond surface-level content.",
   },
   {
     label: "Diaspora Communities",
-    description: "Individuals seeking reconnection with heritage, language, and the stories of elders back home.",
+    description: "Individuals seeking reconnection with heritage, language, and the living stories of home.",
   },
   {
     label: "Researchers & Journalists",
-    description: "Professionals working on oral history, cultural documentation, and long-form storytelling.",
+    description: "Professionals working in oral history, cultural documentation, biography, and long-form storytelling.",
   },
   {
-    label: "Families",
-    description: "Families who want to preserve the life of a loved one before those memories are lost.",
+    label: "Families & Communities",
+    description: "Anyone who wants to preserve the story of a person they love — before those memories are lost.",
   },
 ];
 
@@ -34,7 +34,7 @@ const PHASES = [
     period: "Month 1",
     items: [
       "Finalise branding, visual identity, and theme song",
-      "Secure first 6 guests — a mix of elders and public figures",
+      "Secure first 6 subjects — public figures, community voices, and compelling everyday lives",
       "Acquire and arrange filming equipment and studio setup",
       "Build the production team: Director, Cinematographer, Editor, Producer",
       "Design the YouTube channel and social platforms",
@@ -85,10 +85,10 @@ export default function About() {
             About the Initiative
           </span>
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-serif font-medium leading-tight tracking-tight mb-8">
-            Preserving wisdom.<br />Building legacy.
+            Every life has<br />a story worth telling.
           </h1>
           <p className="text-xl text-background/60 leading-relaxed max-w-2xl font-serif">
-            Memoirs is a storytelling initiative on a mission to document the lives, experiences, and wisdom of elderly people and public figures — for posterity, inspiration, and the generations that follow.
+            Memoirs is a storytelling platform on a mission to document the lives, experiences, and wisdom of remarkable people — from public figures and community leaders to the everyday individuals whose stories hold lasting value.
           </p>
         </div>
       </section>
@@ -100,16 +100,16 @@ export default function About() {
             <div>
               <h2 className="text-sm font-medium uppercase tracking-widest text-primary mb-6">Vision</h2>
               <p className="text-2xl md:text-3xl font-serif leading-relaxed text-foreground">
-                To preserve and share the untold stories, wisdom, and lived experiences of elderly people and public figures — for posterity, for inspiration, and for learning.
+                To preserve and share the untold stories, wisdom, and lived experiences of remarkable people — public figures, community voices, and everyday individuals — for posterity, inspiration, and learning.
               </p>
             </div>
             <div>
               <h2 className="text-sm font-medium uppercase tracking-widest text-primary mb-6">Mission</h2>
               <p className="text-lg text-muted-foreground leading-relaxed">
-                To build an engaging content platform that documents rich life stories through authentic, high-quality video storytelling — and grows into a permanent repository of wisdom and human history.
+                To build an engaging, multi-format storytelling platform that captures rich human lives through video, audio, and the written word — and grows into a permanent repository of wisdom, identity, and history.
               </p>
               <p className="text-lg text-muted-foreground leading-relaxed mt-6">
-                We do not build monuments to the famous alone. We believe the deepest wisdom often sits quietly next door — in the grandmother who survived a war with her joy intact, in the craftsman who gave fifty years to a single skill, in the teacher who changed the arc of a hundred lives.
+                We are not here only for the famous. The deepest wisdom often sits in unexpected places — in the activist who changed a neighbourhood, the craftsman who gave fifty years to a single skill, the immigrant who rebuilt a life from nothing, the teacher whose name a hundred people still carry with them.
               </p>
             </div>
           </div>
@@ -182,7 +182,7 @@ export default function About() {
         <div className="container mx-auto px-4 max-w-3xl text-center">
           <h2 className="text-3xl md:text-4xl font-serif mb-6">Be Part of the Archive</h2>
           <p className="text-lg text-muted-foreground mb-10 leading-relaxed">
-            If you carry the memory of someone whose story deserves to outlast them, we invite you to leave it here. Write it with care. Write it with love. Make it worthy of the life it holds.
+            If you know someone whose story deserves to be told — or carry a story of your own — we want to hear it. Memoirs is a platform for any voice, any background, any life that holds meaning for others.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
