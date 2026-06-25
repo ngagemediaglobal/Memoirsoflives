@@ -27,7 +27,7 @@ export function Footer() {
               </svg>
             </a>
             <a
-              href="https://instagram.com/memoirsinitiative"
+              href="https://www.instagram.com/memoirs.ng?igsh=MWRwbm8wZXBnYmRndQ=="
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Instagram"
