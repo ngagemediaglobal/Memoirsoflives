@@ -17,9 +17,9 @@ export function Navbar() {
   }, [open]);
 
   const links = [
+    { href: "/about", label: "About" },
     { href: "/stories", label: "Archive" },
     { href: "/store", label: "Store" },
-    { href: "/about", label: "About" },
     { href: "/request", label: "Request a Memoir" },
   ];
 
