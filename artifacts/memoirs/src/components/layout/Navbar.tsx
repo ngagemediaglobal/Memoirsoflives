@@ -45,7 +45,7 @@ export function Navbar() {
             </Link>
           ))}
           <a
-            href="https://youtube.com/@memoirsinitiative"
+            href="https://www.youtube.com/@Memoirs_ng"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
@@ -98,7 +98,7 @@ export function Navbar() {
             </Link>
           ))}
           <a
-            href="https://youtube.com/@memoirsinitiative"
+            href="https://www.youtube.com/@Memoirs_ng"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 text-base font-medium py-3 px-3 rounded-sm text-foreground hover:bg-muted transition-colors"

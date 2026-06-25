@@ -16,7 +16,7 @@ export function Footer() {
           </p>
           <div className="mt-8 flex items-center gap-5">
             <a
-              href="https://youtube.com/@memoirsinitiative"
+              href="https://www.youtube.com/@Memoirs_ng"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="YouTube"
@@ -75,7 +75,7 @@ export function Footer() {
           <h4 className="font-serif text-lg mb-6">Participate</h4>
           <ul className="space-y-4 text-background/60">
             <li><Link href="/contribute" className="hover:text-primary transition-colors">Share a Memory</Link></li>
-            <li><a href="https://youtube.com/@memoirsinitiative" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">Watch on YouTube</a></li>
+            <li><a href="https://www.youtube.com/@Memoirs_ng" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">Watch on YouTube</a></li>
             <li><a href="https://spotify.com/show/memoirs" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">Listen on Spotify</a></li>
             <li><a href="https://podcasts.apple.com/podcast/memoirs" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">Apple Podcasts</a></li>
           </ul>
