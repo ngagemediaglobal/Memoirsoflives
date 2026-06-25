@@ -1,0 +1,8 @@
+uploads = []
+generated = []
+
+[[outputs]]
+id = "IueHS4N6VlyIrzUhvZY_W"
+uri = "file://artifacts/memoirs-video/public/audio/bg_music.mp3"
+type = "audio"
+title = "background music"
