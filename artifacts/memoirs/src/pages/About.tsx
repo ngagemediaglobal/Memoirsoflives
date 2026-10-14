@@ -27,54 +27,6 @@ const AUDIENCES = [
   },
 ];
 
-const PHASES = [
-  {
-    number: "Phase 1",
-    label: "Development",
-    period: "Month 1",
-    items: [
-      "Finalise branding, visual identity, and theme song",
-      "Secure first 6 subjects — public figures, community voices, and compelling everyday lives",
-      "Acquire and arrange filming equipment and studio setup",
-      "Build the production team: Director, Cinematographer, Editor, Producer",
-      "Design the YouTube channel and social platforms",
-    ],
-  },
-  {
-    number: "Phase 2",
-    label: "Production",
-    period: "Months 2–3",
-    items: [
-      "Film and edit the first 6–10 episodes",
-      "Create promotional assets, thumbnails, teaser reels, and trailers",
-      "Develop the intro video, episode format, and storytelling arc",
-      "Create the branded Memoirs Journal for documentation",
-    ],
-  },
-  {
-    number: "Phase 3",
-    label: "Launch & Distribution",
-    period: "Month 4",
-    items: [
-      "Launch the Memoirs YouTube channel with the first 3 episodes",
-      "Weekly episode drops across YouTube, Spotify, and Apple Podcasts",
-      "Email newsletter campaign with story excerpts",
-      "Strategic guest rollout to grow audience through their networks",
-    ],
-  },
-  {
-    number: "Phase 4",
-    label: "Growth & Partnerships",
-    period: "Months 5–9",
-    items: [
-      "Collaborate with legacy NGOs, embassies, and cultural ministries",
-      "Begin shooting Memoirs: The Documentary Series (longer format)",
-      "Host Memoirs Live — a recorded public storytelling event",
-      "Explore distribution partnerships with Netflix, Amazon, EbonyLife, and others",
-    ],
-  },
-];
-
 export default function About() {
   return (
     <div>
@@ -140,37 +92,6 @@ export default function About() {
               <div key={aud.label} className="p-8 border border-border rounded-sm hover:border-primary/40 transition-colors">
                 <h3 className="font-serif text-xl mb-3">{aud.label}</h3>
                 <p className="text-muted-foreground leading-relaxed">{aud.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Roadmap */}
-      <section className="py-24 bg-foreground text-background">
-        <div className="container mx-auto px-4 max-w-5xl">
-          <div className="mb-16">
-            <h2 className="text-sm font-medium uppercase tracking-widest text-primary mb-4">Work Plan</h2>
-            <h3 className="text-3xl md:text-4xl font-serif text-background">Phase by Phase</h3>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {PHASES.map((phase) => (
-              <div key={phase.number} className="p-8 border border-background/10 rounded-sm">
-                <div className="flex items-center justify-between mb-6">
-                  <span className="text-xs font-medium uppercase tracking-widest text-background/40">{phase.number}</span>
-                  <span className="text-xs font-medium text-primary/80 border border-primary/30 px-2 py-1 rounded-sm uppercase tracking-widest">
-                    {phase.period}
-                  </span>
-                </div>
-                <h4 className="font-serif text-2xl text-background mb-6">{phase.label}</h4>
-                <ul className="flex flex-col gap-3">
-                  {phase.items.map((item, i) => (
-                    <li key={i} className="flex items-start gap-3 text-sm text-background/60 leading-relaxed">
-                      <span className="w-1 h-1 rounded-full bg-primary/60 shrink-0 mt-2" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
               </div>
             ))}
           </div>
